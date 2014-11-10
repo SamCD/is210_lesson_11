@@ -6,9 +6,13 @@
 import datetime
 
 
-class InvalidAgeError(Exception): pass
+class InvalidAgeError(Exception):
+    """Invalid Age exception"""
+    pass
+
 
 def get_age(birthyear):
+    """Retrieves age or raises InvalidAgeError"""
     age = datetime.datetime.now().year - birthyear
     try:
         assert age >= 0

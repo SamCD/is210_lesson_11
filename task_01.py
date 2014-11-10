@@ -4,9 +4,10 @@
 
 
 def simple_lookup(var1, var2):
+    """Accessing dictionary key"""
     try:
         ret = var1[var2]
-    except IndexError:
-        print "Warning: Your index/key doesn't exist."
+    except KeyError:
+        print "Warning: Your key doesn't exist."
         ret = var1
     return ret

@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 """Task 06 module"""
 
+
 def exception_test(arg1, arg2, arg3):
+    """Exception test"""
     caught = False
     try:
         arg1[arg2].index(arg3)
