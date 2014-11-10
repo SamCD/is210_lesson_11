@@ -20,12 +20,23 @@ class CustomLogger(object):
     def flush(self):
         handled = []
 
-        fhandler = open(self.logfilename, 'a')
-        for index, entry in enumerate(self.msgs):
-            fhandler.write(str(entry) + '\n')
-            handled.append(index)
-
-        fhandler.close()
+        try:
+            fhandler = open(self.logfilename, 'a')
+        except NameError as nerr:
+            log("{} is invalid".format(self.logfilename))
+            raise
+        except IOError as ioerr:
+            log("error")
+        else:
+            for index, entry in enumerate(self.msgs):
+                    try:
+                        handler.write(str(entry) + '\n')
+                    except NameError("Can/'nt be written") as nerr:
+                        raise nerr
+                    else:
+                        handled.append(index)
+        finally:
+            fhandler.close()
 
         for index in handled[::-1]:
             del self.msgs[index]
