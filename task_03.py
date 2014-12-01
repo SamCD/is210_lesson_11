@@ -19,25 +19,29 @@ class CustomLogger(object):
             timestamp = time.time()
         self.msgs.append((timestamp, msg))
 
+
     def flush(self):
         """Flush method"""
         handled = []
 
         try:
             fhandler = open(self.logfilename, 'a')
-        except NameError as nerr:
-            self.log("{} is invalid".format(self.logfilename))
-            raise nerr
-        except IOError:
-            self.log("error")
-        else:
+        except IOError as err:
+            self.log('Could not open!')
+            raise err
+
+        try:
             for index, entry in enumerate(self.msgs):
                 try:
                     fhandler.write(str(entry) + '\n')
-                except NameError("Can/'nt be written") as nerr:
-                    raise nerr
+                except IOError as err:
+                    raise err
+                except Exception as err:
+                    self.log(err.args[0])
                 else:
                     handled.append(index)
+        except IOError as err:
+            self.log('Had an IOError while processing log files.')
         finally:
             fhandler.close()
 

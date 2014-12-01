@@ -7,7 +7,7 @@ def simple_lookup(var1, var2):
     """Accessing dictionary key"""
     try:
         ret = var1[var2]
-    except KeyError:
+    except (LookupError):
         print "Warning: Your key doesn't exist."
         ret = var1
     return ret

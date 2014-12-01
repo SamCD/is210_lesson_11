@@ -14,8 +14,6 @@ class InvalidAgeError(Exception):
 def get_age(birthyear):
     """Retrieves age or raises InvalidAgeError"""
     age = datetime.datetime.now().year - birthyear
-    try:
-        assert age >= 0
-    except:
-        raise InvalidAgeError()
+    if age < 0:
+        raise InvalidAgeError('You\'re from the future!')
     return age
